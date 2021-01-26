@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'TodoListWebApp'`, () => {
+  it(`should have as title 'AngularTodoList'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('TodoListWebApp');
+    expect(app.title).toEqual('AngularTodoList');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('TodoListWebApp app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('AngularTodoList app is running!');
   });
 });
