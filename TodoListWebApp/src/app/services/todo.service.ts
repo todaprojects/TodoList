@@ -14,27 +14,24 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class TodoService {
-  todosUrl = 'https://jsonplaceholder.typicode.com/todos';
-  todosLimit = '?_limit=5';
+  todosUrl = 'https://localhost:5001/todo/';
 
   constructor(private http: HttpClient) {
   }
 
   // Get Todos
   getTodos(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${this.todosUrl}${this.todosLimit}`);
+    return this.http.get<Todo[]>(`${this.todosUrl}`);
   }
 
   // Toggle Completed
   toggleCompleted(todo: Todo): Observable<any> {
-    const url = `${this.todosUrl}/${todo.id}`;
-    return this.http.put(url, todo, httpOptions);
+    return this.http.put(`${this.todosUrl}${todo.id}`, todo, httpOptions);
   }
 
   // Delete Todo
   deleteTodo(todo: Todo): Observable<Todo> {
-    const url = `${this.todosUrl}/${todo.id}`;
-    return this.http.delete<Todo>(url, httpOptions);
+    return this.http.delete<Todo>(`${this.todosUrl}${todo.id}`, httpOptions);
   }
 
   // Add Todo
