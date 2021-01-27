@@ -1,4 +1,4 @@
 # TodoList
 
-####`TodoListWebApi` - server side .NET application
-####`TodoListWebApp` - client side Angular application
+#### `TodoListWebApi` - server side .NET application
+#### `TodoListWebApp` - client side Angular application
