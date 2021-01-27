@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TodoListWebApi.Application;
 
 namespace TodoListWebApi.WebApi
 {
@@ -26,6 +27,15 @@ namespace TodoListWebApi.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var serviceCollection = DependencyInjection.ConfigureServices();
+            foreach (var service in serviceCollection)
+            {
+                services.Add(service);
+            }
+
+            services.AddCors(options => options.AddPolicy("ApiCorsPolicy",
+                builder => { builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader(); }));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -42,6 +52,8 @@ namespace TodoListWebApi.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TodoListWebApi.WebApi v1"));
             }
+
+            app.UseCors("ApiCorsPolicy");
 
             app.UseHttpsRedirection();
 
